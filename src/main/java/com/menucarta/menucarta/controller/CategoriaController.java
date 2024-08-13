@@ -40,5 +40,27 @@ public class CategoriaController {
         categoriaService.eliminarCategoria(id);
         return ResponseEntity.noContent().build();
     }
+    @PutMapping("/{id}")//actualiza la categoria
+    public ResponseEntity<Categoria> actualizarCategoria(@PathVariable Long id, @RequestBody Categoria categoriaActualizada) {
+    Categoria categoria = categoriaService.actualizarCategoria(id, categoriaActualizada);
+        if (categoria != null) {
+        return ResponseEntity.ok(categoria);
+        } else {
+        return ResponseEntity.notFound().build();
+        }
+    }
+     @PutMapping("/{categoriaId}/producto/{productoId}")//le asigna un producto a la categoria
+    public ResponseEntity<Categoria> asignarProductoACategoria(
+            @PathVariable Long categoriaId,
+            @PathVariable Long productoId) {
+
+        Categoria categoriaActualizada = categoriaService.asignarProductoACategoria(categoriaId, productoId);
+
+        if (categoriaActualizada != null) {
+            return ResponseEntity.ok(categoriaActualizada);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
 

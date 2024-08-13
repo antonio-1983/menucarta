@@ -40,5 +40,23 @@ public class ProductoController {
         productoService.eliminarProducto(id);
         return ResponseEntity.noContent().build();
     }
+    @PutMapping("/{id}")//actualiza el producto
+    public ResponseEntity<Producto> actualizarProducto(@PathVariable Long id, @RequestBody Producto productoActualizado) {
+        Producto producto = productoService.actualizarProducto(id, productoActualizado);
+        return ResponseEntity.ok(producto);
+    }
+     @PutMapping("/{productoId}/categoria/{categoriaId}")//actualiza la categoria del producto
+    public ResponseEntity<Producto> actualizarCategoriaDelProducto(
+            @PathVariable Long productoId,
+            @PathVariable Long categoriaId) {
+
+        Producto productoActualizado = productoService.actualizarCategoriaDelProducto(productoId, categoriaId);
+
+        if (productoActualizado != null) {
+            return ResponseEntity.ok(productoActualizado);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
 
