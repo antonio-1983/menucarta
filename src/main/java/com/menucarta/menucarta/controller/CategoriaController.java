@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/categorias")
+@CrossOrigin(origins = "http://localhost:4200") // Permite CORS en este controlador específico
 public class CategoriaController {
 
     @Autowired
